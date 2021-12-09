@@ -2,11 +2,12 @@
 import { numbers, boards } from '../data/day4.js';
 
 let importedData = boards.map((x) => x);
-const foundValue = -1;
-const bingoSize = 5;
+const FOUND_VALUE = -1;
+const BINGO_SIZE = 5;
+const CLEAR_VALUE = -9999;
 
 function calculateWinnerBoardTotal(winningRow, bingoCards) {
-  var startingBoardIndex = parseInt(winningRow / bingoSize) * bingoSize;
+  var startingBoardIndex = parseInt(winningRow / BINGO_SIZE) * BINGO_SIZE;
 
   console.log(
     'row',
@@ -19,9 +20,9 @@ function calculateWinnerBoardTotal(winningRow, bingoCards) {
   const reducer = (previousValue, currentValue) => previousValue + currentValue;
 
   let sum = 0;
-  for (var i = 0; i < bingoSize; i++) {
+  for (var i = 0; i < BINGO_SIZE; i++) {
     sum = bingoCards[startingBoardIndex + i]
-      .filter((e) => e > foundValue)
+      .filter((e) => e > FOUND_VALUE)
       .reduce(reducer, sum);
   }
   return sum;
@@ -31,15 +32,15 @@ function updateBingoCards(value, bingoCards) {
   for (let i = 0; i < bingoCards.length; i++) {
     for (let j = 0; j < bingoCards[i].length; j++) {
       if (bingoCards[i][j] === value) {
-        bingoCards[i][j] = foundValue;
+        bingoCards[i][j] = FOUND_VALUE;
       }
     }
   }
 }
 
 function removeCardFromTheGame(startRow, bingoCards) {
-  for (var i = 0; i < bingoSize; i++) {
-    bingoCards[startRow + i].fill(-99999);
+  for (var i = 0; i < BINGO_SIZE; i++) {
+    bingoCards[startRow + i].fill(CLEAR_VALUE);
   }
 }
 
@@ -50,7 +51,7 @@ function checkWinners(bingoCards) {
 
   // Check horizontal
   while (i < bingoCards.length) {
-    if (bingoCards[i].every((e) => e === foundValue)) {
+    if (bingoCards[i].every((e) => e === FOUND_VALUE)) {
       console.log('it s a winning row', i);
       winners.push(i);
     }
@@ -60,13 +61,13 @@ function checkWinners(bingoCards) {
   i = 0;
   // Check vertical win
   while (i < bingoCards.length) {
-    for (var x = 0; x < bingoSize; x++) {
+    for (var x = 0; x < BINGO_SIZE; x++) {
       let isAWinningColumn =
-        bingoCards[i][x] === foundValue &&
-        bingoCards[i + 1][x] === foundValue &&
-        bingoCards[i + 2][x] === foundValue &&
-        bingoCards[i + 3][x] === foundValue &&
-        bingoCards[i + 4][x] === foundValue;
+        bingoCards[i][x] === FOUND_VALUE &&
+        bingoCards[i + 1][x] === FOUND_VALUE &&
+        bingoCards[i + 2][x] === FOUND_VALUE &&
+        bingoCards[i + 3][x] === FOUND_VALUE &&
+        bingoCards[i + 4][x] === FOUND_VALUE;
 
       if (isAWinningColumn) {
         console.log('it s a winning column', i);
@@ -74,7 +75,7 @@ function checkWinners(bingoCards) {
       }
     }
 
-    i += bingoSize;
+    i += BINGO_SIZE;
   }
 
   return winners;
@@ -84,7 +85,7 @@ function resolve() {
   let index = 0;
   let hasWinner = false;
 
-  let boardsToWin = parseInt(importedData.length / bingoSize);
+  let boardsToWin = parseInt(importedData.length / BINGO_SIZE);
   console.log('we have ', boardsToWin, 'boards in da game');
   do {
     let currentNumber = numbers[index];
@@ -96,7 +97,7 @@ function resolve() {
 
     if (hasWinner.length > 0) {
       for (let winnerIndex = 0; winnerIndex < hasWinner.length; winnerIndex++) {
-        let boardId = parseInt(hasWinner[winnerIndex] / bingoSize);
+        let boardId = parseInt(hasWinner[winnerIndex] / BINGO_SIZE);
         if (boardsToWin == 1) {
           var result = calculateWinnerBoardTotal(
             hasWinner[winnerIndex],
@@ -104,11 +105,11 @@ function resolve() {
           );
 
           console.log('last board is ', boardId, hasWinner[winnerIndex]);
-          console.log('current number: ', currentNumber);
-          console.log('sum of board', result);
+
+          console.log('result is ', currentNumber * result);
           boardsToWin = 0;
         } else {
-          removeCardFromTheGame(boardId * bingoSize, importedData);
+          removeCardFromTheGame(boardId * BINGO_SIZE, importedData);
 
           boardsToWin--;
 
