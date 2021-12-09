@@ -5,4 +5,4 @@ import './style.css';
 const appDiv = document.getElementById('app');
 appDiv.innerHTML = `<h1>JS Starter</h1>`;
 
-import './exercises/day4-part2.js';
+import './exercises/day9-part2.js';
