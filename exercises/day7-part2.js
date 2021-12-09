@@ -5,7 +5,7 @@ function calculateEffort(index) {
   for (var i = 0; i < data.length; i++) {
     let current = Math.abs(data[i] - index);
 
-    effort += current;
+    effort += current * (current + 1)) / 2;
   }
   return effort;
 }

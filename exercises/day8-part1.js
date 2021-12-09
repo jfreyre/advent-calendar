@@ -1,11 +1,11 @@
-import { input as data } from '../data/day7.js';
+import { mock as data } from '../data/day8.js';
 
 function calculateEffort(index) {
   let effort = 0;
   for (var i = 0; i < data.length; i++) {
     let current = Math.abs(data[i] - index);
 
-    effort += current;
+    effort += (current * (current + 1)) / 2;
   }
   return effort;
 }
