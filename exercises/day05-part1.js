@@ -1,4 +1,4 @@
-import { input as data } from '../data/day5.js';
+import { input as data } from '../data/day05.js';
 
 const flat = data.flat();
 const xValuesOnly = flat.filter((e, i) => i % 4 == 0 || i % 4 == 2);

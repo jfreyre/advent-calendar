@@ -1,4 +1,4 @@
-import { mock as data } from '../data/day9.js';
+import { mock as data } from '../data/day09.js';
 
 function resolve() {
   const numOfRows = data.length;

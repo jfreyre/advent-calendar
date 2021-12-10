@@ -1,4 +1,4 @@
-import { data } from '../data/day2.js';
+import { data } from '../data/day02.js';
 
 let x = 0;
 let depth = 0;

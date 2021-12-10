@@ -1,4 +1,4 @@
-import { input } from '../data/day1.js';
+import { input } from '../data/day01.js';
 
 let max = input[0];
 

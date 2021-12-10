@@ -1,4 +1,4 @@
-import { input as data } from '../data/day7.js';
+import { input as data } from '../data/day07.js';
 
 function calculateEffort(index) {
   let effort = 0;

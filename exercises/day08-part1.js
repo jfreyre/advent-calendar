@@ -1,4 +1,4 @@
-import { input as data } from '../data/day8.js';
+import { input as data } from '../data/day08.js';
 
 function decodeLine(line) {
   return line.filter((word) => [2, 3, 4, 7].includes(word.length)).length;

@@ -1,4 +1,4 @@
-import { mock as data } from '../data/day6.js';
+import { mock as data } from '../data/day06.js';
 
 const AMOUNT_OF_DAYS = 80;
 function resolve() {
