@@ -1,10 +1,13 @@
 import { mock as data } from './data.js';
 const MAX_LIGHT_VALUE = 9;
+let flashes = 0;
 function flash(flashed, i, j) {
   // Exit condition
   if (flashed.indexOf(i + '' + j) >= 0) {
     return;
   }
+  console.log('flash for ', i, ' ', j);
+  flashes++;
 
   for (var updatedI = -1; updatedI <= 1; updatedI++) {
     for (var updatedJ = -1; updatedJ <= 1; updatedJ++) {
@@ -48,10 +51,12 @@ function step() {
 }
 
 function solve() {
-  const iteration = 3;
+  const iteration = 10;
   for (let i = 0; i < iteration; i++) {
     step();
   }
+
+  console.log(flashes);
 }
 
 solve();
