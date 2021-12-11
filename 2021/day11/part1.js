@@ -23,14 +23,14 @@ function flash(flashed, i, j) {
 function step() {
   // First we update everybody
   for (var i = 0; i < data.length; i++) {
-    for (let j = 0; i < data[i].length; j++) {
+    for (let j = 0; j < data[i].length; j++) {
       data[i][j] += 1;
     }
   }
 
   let flashed = [];
   for (var i = 0; i < data.lengt; i++) {
-    for (let j = 0; i < data[i].length; j++) {
+    for (let j = 0; j < data[i].length; j++) {
       if (data[i][j] >= MAX_LIGHT_VALUE) {
         flash(flashed, i, j);
       }
@@ -39,7 +39,7 @@ function step() {
 
   // Then we clean
   for (var i = 0; i < data.lengt; i++) {
-    for (let j = 0; i < data[i].length; j++) {
+    for (let j = 0; j < data[i].length; j++) {
       if (data[i][j] >= MAX_LIGHT_VALUE) {
         data[i][j] = 0;
       }
