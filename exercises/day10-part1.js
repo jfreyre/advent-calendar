@@ -12,47 +12,36 @@ let map = {
   '>': '<',
 };
 
+const sumReducer = (previousValue, currentValue) =>
+  previousValue + currentValue;
+
 const OPENING = Object.values(map);
 const CLOSING = Object.keys(map);
 
-function isIncomplete(s) {
-  OPENING.map((c) => {
-    (s.match(`${c}`) || []).length;
-  });
-}
-
-function isValid(s) {
+function analyseLine(line) {
   let stack = [];
-
-  for (let i = 0; i < s.length; i++) {
-    if (OPENING.indexOf(s[i]) >= 0) {
-      stack.push(s[i]);
-    } else if (stack[stack.length - i] === map[s[i]]) {
+  let i = 0;
+  let error = null;
+  while (i < line.length && error === null) {
+    const current = line[i];
+    if (OPENING.indexOf(current) >= 0) {
+      stack.push(current);
+    } else if (stack[stack.length - 1] === map[current]) {
       stack.pop();
     } else {
-      return s[i];
+      error = current;
+      console.log('should not be there', current);
     }
+    i++;
   }
 
-  return stack.length ? stack : true;
-}
-function analyseLine(line) {
-  if (isIncomplete(line)) {
-    return 0;
-  }
-
-  let r = isValid(line);
-  if (r === true) {
-    console.log(line, 'is valid');
-  } else {
-    console.log(r, scores[r]);
-  }
-
-  return scores[r];
+  console.log(stack, scores[stack[0]]);
+  return stack.length ? scores[stack.pop()] : 0;
 }
 function resolve() {
   let score = 0;
   for (var i = 0; i < data.length; i++) {
+    console.log('new lien');
     const line = data[i];
     score += analyseLine(line);
   }
