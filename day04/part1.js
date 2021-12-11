@@ -1,5 +1,5 @@
 //import { numbersMock as numbers, boardsMock as boards } from '../data/day4.js';
-import { numbers, boards } from '../data/day04.js';
+import { numbers, boards } from './data.js';
 
 let importedData = boards.map((x) => x);
 const foundValue = -1;

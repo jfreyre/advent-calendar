@@ -1,4 +1,4 @@
-import { input } from '../data/day01.js';
+import { input } from './data.js';
 
 let count = 0;
 let sum = input[0] + input[1] + input[2];

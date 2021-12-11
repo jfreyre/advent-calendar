@@ -1,4 +1,4 @@
-import { input } from '../data/day03.js';
+import { input } from './data.js';
 
 let gamma = '';
 let epsilon = '';

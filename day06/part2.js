@@ -1,4 +1,4 @@
-import { input as data } from '../data/day06.js';
+import { input as data } from './data.js';
 
 // We build an array with the amount of occurence
 // index = days; value = amount of lantern fish
