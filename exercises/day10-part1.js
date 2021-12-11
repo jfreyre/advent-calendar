@@ -36,6 +36,8 @@ function analyseLine(line) {
   }
   return error !== null ? scores[error] : 0;
 }
+
+
 function resolve() {
   let score = 0;
   for (var i = 0; i < data.length; i++) {

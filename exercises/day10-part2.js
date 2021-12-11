@@ -1,10 +1,11 @@
 import { input as data } from '../data/day10.js';
 let scores = {
-  ')': 3,
-  ']': 57,
-  '}': 1197,
-  '>': 25137,
+  '(': 1,
+  '[': 2,
+  '{': 3,
+  '<': 4,
 };
+
 let map = {
   ')': '(',
   '}': '{',
@@ -12,38 +13,56 @@ let map = {
   '>': '<',
 };
 
-const sumReducer = (previousValue, currentValue) =>
-  previousValue + currentValue;
-
 const OPENING = Object.values(map);
 const CLOSING = Object.keys(map);
 
-function analyseLine(line) {
+function lineHasError(line) {
   let stack = [];
   let i = 0;
-  let error = null;
-  while (i < line.length && error === null) {
+  while (i < line.length) {
     const current = line[i];
+    // New opening
     if (OPENING.indexOf(current) >= 0) {
       stack.push(current);
+
+      // Correct closing
     } else if (stack[stack.length - 1] === map[current]) {
       stack.pop();
+
+      // MEh.... now we ignore erroneous
     } else {
-      error = current;
-      console.log('should not be there', current);
+      return [];
     }
     i++;
   }
-  return error !== null ? scores[error] : 0;
+  return stack;
 }
+
+function resolveStack(stack) {
+  let completion = 0;
+  let current = null;
+  while ((current = stack.pop())) {
+    completion *= 5;
+    completion += scores[current];
+    //console.log('--->', completion, current, scores[current]);
+  }
+  return completion;
+}
+
 function resolve() {
-  let score = 0;
+  let scores = [];
   for (var i = 0; i < data.length; i++) {
     const line = data[i];
-    score += analyseLine(line);
+
+    const t = lineHasError(line);
+    if (t.length > 0) {
+      scores.push(resolveStack(t));
+    }
   }
 
-  console.log('final score is ', score);
+  scores = scores.sort((a, b) => a - b);
+
+  console.log('final score is ', scores[parseInt(scores.length / 2)]);
 }
 
 resolve();
