@@ -1,4 +1,4 @@
-import { input as data } from '../data/day09.js';
+import { input as data } from './data.js';
 
 Array.prototype.getUnique = function () {
   var o = {},

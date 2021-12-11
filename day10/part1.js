@@ -1,4 +1,4 @@
-import { input as data } from '../data/day10.js';
+import { input as data } from './data.js';
 let scores = {
   ')': 3,
   ']': 57,
@@ -36,7 +36,6 @@ function analyseLine(line) {
   }
   return error !== null ? scores[error] : 0;
 }
-
 
 function resolve() {
   let score = 0;

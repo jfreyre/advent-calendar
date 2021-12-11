@@ -1,4 +1,4 @@
-import { input as data } from '../data/day10.js';
+import { input as data } from './data.js';
 let scores = {
   '(': 1,
   '[': 2,
