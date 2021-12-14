@@ -80,13 +80,13 @@ function solve() {
     array[current[1]][current[0]] = '#';
   }
 
-  array = fold(array, folds[0]);
+  for (let i = 0; i < folds.length; i++) {
+    array = fold(array, folds[i]);
+  }
 
-  display(array);
-  visible(array);
   // array = fold(array, folds[1]);
 
-  // display(array);
+  display(array);
 }
 
 solve();
