@@ -1,15 +1,17 @@
-import { mockMap as map, mockPolymer as polymer } from './data.js';
+import { map as map, polymer as polymer } from './data.js';
 
 let polymer_template = polymer;
 
 let pairs_with_occurences = [];
 
 var add_pair = function (pair, input, output) {
-  const index = input.findIndex((item) => item[0] == pair);
+  const index = output.findIndex((item) => item[0] == pair);
   if (index >= 0) {
     output[index][1]++;
   } else {
-    output.push([pair, 1]);
+    let inputIndex = output.findIndex((i) => i[0] == pair);
+    let v = inputIndex >= 0 ? input[v][1] : 1;
+    output.push([pair, v]);
   }
 };
 
@@ -21,7 +23,7 @@ for (let i = 0; i < polymer_template.length - 1; i++) {
 console.log(pairs_with_occurences);
 
 for (let step = 0; step < 40; step++) {
-  let copy = [...pairs_with_occurences];
+  let copy = [];
 
   for (let i = 0; i < pairs_with_occurences.length; i++) {
     let pair = pairs_with_occurences[i][0];
