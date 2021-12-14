@@ -66,10 +66,13 @@ function solve() {
   // Init array
   let array = new Array(maxY());
 
+  console.log(maxY(), maxY());
+
   for (let i = 0; i < array.length; i++) {
     array[i] = new Array(maxX()).fill('.');
   }
 
+  console.log(maxY(), maxY());
   display(array);
 
   for (let i = 0; i < data.length; i++) {
