@@ -1,4 +1,4 @@
-import { input as data, folds as folds } from './data.js';
+import { mock as data, foldMock as folds } from './data.js';
 
 function maxX() {
   return [...data].sort((a, b) => b[0] - a[0])[0][0] + 1;
