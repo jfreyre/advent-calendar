@@ -1,4 +1,4 @@
-import { map as map, polymer as polymer } from './data.js';
+import { mockMap as map, mockPolymer as polymer } from './data.js';
 
 function step(input) {
   let output = input[0];
@@ -29,7 +29,7 @@ function explode(polymer) {
 
 function solve() {
   let growingPolymer = polymer;
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 40; i++) {
     growingPolymer = step(growingPolymer);
     console.log(growingPolymer.length, growingPolymer);
   }
