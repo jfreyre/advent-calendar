@@ -1,44 +1,57 @@
 import { mockMap as map, mockPolymer as polymer } from './data.js';
 
-function step(input) {
-  let output = input[0];
+let polymer_template = polymer;
 
-  for (let i = 0; i < input.length - 1; i++) {
-    let sub = input.substring(i, i + 2);
+let pairs_with_occurences = [];
 
-    let index = map[sub];
-    // console.log(sub, index);
+var add_pair = function (pair, input, output) {
+  const index = input.findIndex((item) => item[0] == pair);
+  if (index >= 0) {
+    output[index][1]++;
+  } else {
+    output.push([pair, 1]);
+  }
+};
+
+for (let i = 0; i < polymer_template.length - 1; i++) {
+  let pair = polymer_template.slice(i, i + 2);
+  add_pair(pair, pairs_with_occurences, pairs_with_occurences);
+}
+
+console.log(pairs_with_occurences);
+
+for (let step = 0; step < 40; step++) {
+  let copy = [...pairs_with_occurences];
+
+  for (let i = 0; i < pairs_with_occurences.length; i++) {
+    let pair = pairs_with_occurences[i][0];
+
+    const index = map[pair];
+
     if (index !== undefined) {
-      output += `${index}${input[i + 1]}`;
-    } else {
-      output += sub;
+      add_pair(pair[0] + index, pairs_with_occurences, copy);
+      add_pair(index + pair[1], pairs_with_occurences, copy);
     }
   }
 
-  return output;
+  pairs_with_occurences = copy;
+  console.log(copy);
 }
 
-function explode(polymer) {
-  const counts = {};
-
-  for (const num of polymer) {
-    counts[num] = counts[num] ? counts[num] + 1 : 1;
-  }
-  return counts;
-}
-
-function solve() {
-  let growingPolymer = polymer;
-  for (let i = 0; i < 40; i++) {
-    growingPolymer = step(growingPolymer);
-    console.log(growingPolymer.length, growingPolymer);
+// Get every caracters
+let characters = {};
+for (const pair of pairs_with_occurences) {
+  if (characters.hasOwnProperty(pair[0][0])) {
+    characters[pair[0][0]] += pair[1];
+  } else {
+    characters[pair[0][0]] = pair[1];
   }
 
-  let counts = explode(growingPolymer);
-  console.log(counts);
+  if (characters.hasOwnProperty(pair[0][1])) {
+    characters[pair[0][1]] += pair[1];
+  } else {
+    characters[pair[0][1]] = pair[1];
+  }
 }
 
-solve();
-
-// 2333073 too high
-// 2484561 too high
+console.log(characters);
