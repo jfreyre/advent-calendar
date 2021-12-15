@@ -31,6 +31,7 @@ const travel = (array, from, to) => {
   let unvisited = array.map((a) => a.split('').map((_) => Number.MAX_VALUE));
 
   // debugger;
+  console.log('asd');
   go(from[0], from[1], 0);
   console.log(currentSmallestEffort);
   return unvisited;
@@ -50,10 +51,11 @@ let result = travel(testMatrix, from, to);
 
 // 502 -> too high
 // 493 -> too slow
+// 498 -> OK ?
 // result.forEach((a) =>
 //   console.log(
 //     a
-//       .map((v) => (v === Number.MAX_VALUE ? '**' : ('0' + v).slice(-2)))
+//       .map((v) => (v === Number.MAX_VALUE ? '**' : ('00' + v).slice(-3)))
 //       .join(' ')
 //   )
 // );
