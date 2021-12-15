@@ -1,4 +1,4 @@
-import { map as map, polymer as polymer } from './data.js';
+import { map as map, template as polymer } from './data.js';
 
 function step(input) {
   let output = input[0];

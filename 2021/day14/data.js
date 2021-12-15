@@ -1,4 +1,4 @@
-export const mockPolymer = 'NNCB';
+export const mockTemplate = 'NNCB';
 export const mockMap = {
   CH: 'B',
   HH: 'N',
@@ -18,7 +18,7 @@ export const mockMap = {
   CN: 'C',
 };
 
-export const polymer = 'FSKBVOSKPCPPHVOPVFPC';
+export const template = 'FSKBVOSKPCPPHVOPVFPC';
 
 export const map = {
   BV: 'O',

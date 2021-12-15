@@ -1,59 +1,74 @@
-import { map as map, polymer as polymer } from './data.js';
+import { map as map, template as template } from './data.js';
 
-let polymer_template = polymer;
+const STEP = 40;
+let characters = [];
 
-let pairs_with_occurences = [];
-
-var add_pair = function (pair, input, output) {
-  const index = output.findIndex((item) => item[0] == pair);
-  if (index >= 0) {
-    output[index][1]++;
-  } else {
-    let inputIndex = output.findIndex((i) => i[0] == pair);
-    let v = inputIndex >= 0 ? input[v][1] : 1;
-    output.push([pair, v]);
+function buildPolymer(template) {
+  console.log('template is ', template);
+  let polymer = [];
+  for (let i = 0; i < template.length - 1; i++) {
+    let pair = template.slice(i, i + 2);
+    add_pair(polymer, pair, 1);
   }
-};
-
-for (let i = 0; i < polymer_template.length - 1; i++) {
-  let pair = polymer_template.slice(i, i + 2);
-  add_pair(pair, pairs_with_occurences, pairs_with_occurences);
+  return polymer;
 }
 
-console.log(pairs_with_occurences);
+function add_pair(input, pair, occurence) {
+  const inputIndex = input.findIndex((item) => item[0] == pair);
+  if (inputIndex >= 0) {
+    input[inputIndex][1] += occurence;
+  } else {
+    input.push([pair, occurence]);
+  }
+}
 
-for (let step = 0; step < 40; step++) {
-  let copy = [];
+function add_letter(letter, number_of_times) {
+  const index = characters.findIndex((item) => item[0] == letter);
+  if (index < 0) {
+    characters.push([letter, 1]);
+  } else {
+    characters[index][1] += number_of_times;
+  }
+}
 
-  for (let i = 0; i < pairs_with_occurences.length; i++) {
-    let pair = pairs_with_occurences[i][0];
+function countCharacters() {
+  console.log('characters are', characters);
 
-    const index = map[pair];
+  let t = characters.map((e) => e[1]).sort((a, b) => b - a);
+  console.log('delta min max is ', t[0] - t[t.length - 1]);
+}
 
-    if (index !== undefined) {
-      add_pair(pair[0] + index, pairs_with_occurences, copy);
-      add_pair(index + pair[1], pairs_with_occurences, copy);
+function solve() {
+  let polymer = buildPolymer(template);
+
+  // We store the initial letters of the polymer
+  for (let i = 0; i < template.length; i++) {
+    add_letter(template[i], 1);
+  }
+
+  for (let step = 0; step < STEP; step++) {
+    let copy = [];
+
+    for (let i = 0; i < polymer.length; i++) {
+      const item = polymer[i];
+      let pair = item[0];
+
+      const index = map[pair];
+
+      if (index !== undefined) {
+        add_pair(copy, pair[0] + index, item[1]);
+        add_pair(copy, index + pair[1], item[1]);
+        add_letter(index, item[1]);
+      }
     }
+    debugger;
+    polymer = copy;
+    console.log(characters);
   }
 
-  pairs_with_occurences = copy;
-  console.log(copy);
+  countCharacters();
 }
 
-// Get every caracters
-let characters = {};
-for (const pair of pairs_with_occurences) {
-  if (characters.hasOwnProperty(pair[0][0])) {
-    characters[pair[0][0]] += pair[1];
-  } else {
-    characters[pair[0][0]] = pair[1];
-  }
+solve();
 
-  if (characters.hasOwnProperty(pair[0][1])) {
-    characters[pair[0][1]] += pair[1];
-  } else {
-    characters[pair[0][1]] = pair[1];
-  }
-}
-
-console.log(characters);
+// not 559 <== 989 - 430
