@@ -2,5 +2,8 @@
   "name": "js",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "binary-to-decimal": "^1.0.9",
+    "hex-to-bin": "^1.0.1"
+  }
 }

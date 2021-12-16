@@ -37,6 +37,11 @@ const travel = (array, from, to) => {
   return unvisited;
 };
 
+function updateValue(value, amount) {
+  value += amount;
+  return value > 9 ? value % 9 : value;
+}
+
 function letGetBigger(data) {
   const TIMES = 5;
   const rows = data.length;
@@ -48,28 +53,14 @@ function letGetBigger(data) {
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
+      const value = +data[i][j];
       for (let k = 0; k < TIMES; k++) {
-        biggerArray[i + k * rows][j + 0 * columns] =
-          increase_number_when_9_back_to_1(+data[i][j], 0 + k);
-        biggerArray[i + k * rows][j + 1 * columns] =
-          increase_number_when_9_back_to_1(+data[i][j], 1 + k);
-        biggerArray[i + k * rows][j + 2 * columns] =
-          increase_number_when_9_back_to_1(+data[i][j], 2 + k);
-        biggerArray[i + k * rows][j + 3 * columns] =
-          increase_number_when_9_back_to_1(+data[i][j], 3 + k);
-        biggerArray[i + k * rows][j + 4 * columns] =
-          increase_number_when_9_back_to_1(+data[i][j], 4 + k);
-
-        biggerArray[i + 0 * rows][j + k * rows] =
-          increase_number_when_9_back_to_1(+data[i][j], 0 + k);
-        biggerArray[i + 1 * rows][j + k * rows] =
-          increase_number_when_9_back_to_1(+data[i][j], 1 + k);
-        biggerArray[i + 2 * rows][j + k * rows] =
-          increase_number_when_9_back_to_1(+data[i][j], 2 + k);
-        biggerArray[i + 3 * rows][j + k * rows] =
-          increase_number_when_9_back_to_1(+data[i][j], 3 + k);
-        biggerArray[i + 4 * rows][j + k * rows] =
-          increase_number_when_9_back_to_1(+data[i][j], 4 + k);
+        for (let m = 0; m < TIMES; m++) {
+          biggerArray[i + k * rows][j + m * columns] =
+            updateValue(value, m + k);
+          biggerArray[i + m * rows][j + k * rows] =
+            updateValue(value, m + k);
+        }
       }
     }
   }
@@ -81,6 +72,7 @@ let testMatrix = ['01111', '12321', '12521', '12221'];
 testMatrix = letGetBigger(testMatrix);
 console.log(testMatrix);
 // testMatrix = data;
+return;
 debugger;
 const from = [0, 0];
 const to = [
