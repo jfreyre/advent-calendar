@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "binary-to-decimal": "^1.0.9",
-    "hex-to-bin": "^1.0.1"
+    "directions": "^2.1.1",
+    "hex-to-bin": "^1.0.1",
+    "js-shortest-path": "^1.1.0"
   }
 }

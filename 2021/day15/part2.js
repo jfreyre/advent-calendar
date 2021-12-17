@@ -28,7 +28,7 @@ const travel = (array, from, to) => {
 
   let currentSmallestEffort = Number.MAX_VALUE;
   // We build a matrix with hight cost
-  let unvisited = array.map((a) => a.split('').map((_) => Number.MAX_VALUE));
+  let unvisited = array.map((a) => a.map((_) => Number.MAX_VALUE));
 
   // debugger;
   console.log('asd');
@@ -56,10 +56,11 @@ function letGetBigger(data) {
       const value = +data[i][j];
       for (let k = 0; k < TIMES; k++) {
         for (let m = 0; m < TIMES; m++) {
-          biggerArray[i + k * rows][j + m * columns] =
-            updateValue(value, m + k);
-          biggerArray[i + m * rows][j + k * rows] =
-            updateValue(value, m + k);
+          biggerArray[i + k * rows][j + m * columns] = updateValue(
+            value,
+            m + k
+          );
+          biggerArray[i + m * rows][j + k * rows] = updateValue(value, m + k);
         }
       }
     }
@@ -69,11 +70,10 @@ function letGetBigger(data) {
 }
 
 let testMatrix = ['01111', '12321', '12521', '12221'];
-testMatrix = letGetBigger(testMatrix);
+testMatrix = letGetBigger(data);
 console.log(testMatrix);
 // testMatrix = data;
-return;
-debugger;
+
 const from = [0, 0];
 const to = [
   testMatrix.length - 1,
@@ -81,3 +81,11 @@ const to = [
 ];
 
 let result = travel(testMatrix, from, to);
+
+// result.forEach((a) =>
+//   console.log(
+//     a
+//       .map((v) => (v === Number.MAX_VALUE ? '**' : ('00' + v).slice(-3)))
+//       .join(' ')
+//   )
+// );
