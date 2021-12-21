@@ -1,4 +1,4 @@
-// import { numbersMock as numbers, boardsMock as boards } from '../data/day4.js';
+// import { numbersMock as numbers, boardsMock as boards } from './data.js';
 import { numbers, boards } from './data.js';
 
 let importedData = boards.map((x) => x);
@@ -106,7 +106,12 @@ function resolve() {
 
           console.log('last board is ', boardId, hasWinner[winnerIndex]);
 
-          console.log('result is ', currentNumber * result);
+          console.log(
+            'result is ',
+            currentNumber,
+            result,
+            currentNumber * result
+          );
           boardsToWin = 0;
         } else {
           removeCardFromTheGame(boardId * BINGO_SIZE, importedData);
