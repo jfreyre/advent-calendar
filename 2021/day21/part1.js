@@ -10,26 +10,45 @@ function solve() {
     }
     return sum;
   };
-  function increaseScore(player) {
-    scores[player] +=
-      playersPosition[player] === 10 ? 10 : playersPosition[player] % 10;
+  function increaseScore(playerIndex) {
+    scores[playerIndex] +=
+      playersPosition[playerIndex] === 10
+        ? 10
+        : playersPosition[playerIndex] % 10;
+  }
+
+  function playFor(playerIndex) {
+    const currentScore = rollDice();
+    playersPosition[playerIndex] += currentScore;
+
+    increaseScore(playerIndex);
+
+    console.log(
+      playerIndex + 1,
+      dice,
+      currentScore,
+      playersPosition[playerIndex],
+      scores[playerIndex]
+    );
   }
 
   let currentScore = 0;
   do {
-    currentScore = rollDice();
-    playersPosition[0] += currentScore;
+    playFor(0);
+    playFor(1);
+    // currentScore = rollDice();
+    // playersPosition[0] += currentScore;
 
-    increaseScore(0);
+    // increaseScore(0);
 
-    console.log(1, dice, currentScore, playersPosition[0], scores[0]);
+    // console.log(1, dice, currentScore, playersPosition[0], scores[0]);
 
-    currentScore = rollDice();
-    playersPosition[1] += currentScore;
+    // currentScore = rollDice();
+    // playersPosition[1] += currentScore;
 
-    increaseScore(1);
+    // increaseScore(1);
 
-    console.log(2, dice, currentScore, playersPosition[1], scores[1]);
+    // console.log(2, dice, currentScore, playersPosition[1], scores[1]);
   } while (!scores.some((s) => s >= 1000));
 }
 
