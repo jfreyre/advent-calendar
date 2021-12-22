@@ -31,9 +31,6 @@ function playFor(playerIndex) {
 
   const mod = player.position % BOARD_GAME_SIZE;
   player.score += mod === 0 ? 10 : mod;
-  // players[playerIndex].position === BOARD_GAME_SIZE
-  //   ? BOARD_GAME_SIZE
-  //   : players[playerIndex].position % BOARD_GAME_SIZE;
 
   console.log(playerIndex + 1, dice, currentScore, players[playerIndex]);
 

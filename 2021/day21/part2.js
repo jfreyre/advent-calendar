@@ -1,15 +1,16 @@
 const BOARD_GAME_SIZE = 10;
-const WINNING_SCORE = 1_000;
+const WINNING_SCORE = 100;
+
 let nbTimesDiceRolled = 0;
 let dice = 0;
-// let players = [
-//   { position: 4, score: 0 },
-//   { position: 8, score: 0 },
-// ];
 let players = [
-  { position: 7, score: 0 },
-  { position: 2, score: 0 },
+  { position: 4, score: 0 },
+  { position: 8, score: 0 },
 ];
+// let players = [
+//   { position: 7, score: 0 },
+//   { position: 2, score: 0 },
+// ];
 
 let incDice = () => {
   dice++;
