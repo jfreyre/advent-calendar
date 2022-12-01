@@ -5,4 +5,4 @@ import './style.css';
 const appDiv = document.getElementById('app');
 appDiv.innerHTML = `<h1>JS Starter</h1>`;
 
-import './2021/day11/part2.js';
+import './2022/day01/part1.js';
